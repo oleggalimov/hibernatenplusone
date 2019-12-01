@@ -1,6 +1,7 @@
 package org.oleggalimov.hibernate.nplusone.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,7 +25,7 @@ public class Order implements Serializable {
     private Timestamp sendingDate;
     private Timestamp recevingDate;
     private String comments;
-    @OneToMany(mappedBy = "orderId", targetEntity = OrderItem.class)
+    @OneToMany(mappedBy = "orderId", targetEntity = OrderItem.class, fetch = FetchType.EAGER)
     private List<OrderItem> ordersItems;
 
     public Order() {
