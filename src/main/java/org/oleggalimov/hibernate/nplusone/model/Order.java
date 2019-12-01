@@ -1,5 +1,6 @@
 package org.oleggalimov.hibernate.nplusone.model;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -28,7 +29,8 @@ public class Order implements Serializable {
     private Timestamp recevingDate;
     private String comments;
     @OneToMany(mappedBy = "orderId", targetEntity = OrderItem.class)
-    @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 3)
     private List<OrderItem> ordersItems;
 
     public Order() {
