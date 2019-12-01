@@ -2,12 +2,15 @@ package org.oleggalimov.hibernate.nplusone.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
-@Table (name = "orders")
-public class Order {
+@Table(name = "orders")
+public class Order implements Serializable {
     @Id
     private
     Integer id;
@@ -21,6 +24,8 @@ public class Order {
     private Timestamp sendingDate;
     private Timestamp recevingDate;
     private String comments;
+    @OneToMany(mappedBy = "orderId", targetEntity = OrderItem.class)
+    private List<OrderItem> ordersItems;
 
     public Order() {
     }
@@ -103,5 +108,13 @@ public class Order {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public List<OrderItem> getOrdersItems() {
+        return ordersItems;
+    }
+
+    public void setOrdersItems(List<OrderItem> ordersItems) {
+        this.ordersItems = ordersItems;
     }
 }
